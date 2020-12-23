@@ -1,0 +1,38 @@
+name: foxy pc
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'dev'
+
+  workflow_dispatch:
+
+jobs:
+  foxy-pc:
+    runs-on: ubuntu-latest
+    env:
+      REPO: https://github.com/${{ github.repository }}
+      IMG_SRC: ghcr.io/${{ github.repository_owner }}/src
+      IMG_BLD: ghcr.io/${{ github.repository_owner }}/build-foxy-pc
+      IMG_EXE: ghcr.io/${{ github.repository_owner }}/exe-foxy-pc
+    steps:
+    -
+      name: Login to GitHub Container Registry
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.GHCR_TOKEN }}
+    - 
+      name: Checkout
+      uses: actions/checkout@v2
+    - 
+      name: Build and push
+      run: |
+        docker build --file platforms/pc.dockerfile \
+          --build-arg REPO=${REPO} \
+          --build-arg IMG_SRC=${IMG_SRC} \
+          --build-arg IMG_BLD=${IMG_BLD} \
+          --tag ${IMG_EXE} .
+        docker push ${IMG_EXE}
