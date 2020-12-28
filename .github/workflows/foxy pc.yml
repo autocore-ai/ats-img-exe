@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       REPO: https://github.com/${{ github.repository }}
-      IMG_SRC: ghcr.io/${{ github.repository_owner }}/src
+      IMG_SRC: ghcr.io/${{ github.repository_owner }}/src-ros2
       IMG_BLD: ghcr.io/${{ github.repository_owner }}/build-foxy-pc
       IMG_EXE: ghcr.io/${{ github.repository_owner }}/exe-foxy-pc
     steps:
