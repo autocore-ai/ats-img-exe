@@ -14,6 +14,7 @@ RUN if [ $ROS_DISTRO = foxy ]; \
         --merge-install \
         --catkin-skip-building-tests \
         --packages-up-to \
+        map_tf_generator \
         simple_planning_simulator'; \
     elif [ $ROS_DISTRO = eloquent ]; \
         then /bin/bash -c \
