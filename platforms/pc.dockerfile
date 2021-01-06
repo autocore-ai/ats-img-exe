@@ -12,10 +12,7 @@ RUN if [ $ROS_DISTRO = foxy ]; \
         && source /opt/ros/$ROS_DISTRO/setup.bash \
         && colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release \
         --merge-install \
-        --catkin-skip-building-tests \
-        --packages-up-to \
-        map_tf_generator \
-        simple_planning_simulator'; \
+        --catkin-skip-building-tests'; \
     elif [ $ROS_DISTRO = eloquent ]; \
         then /bin/bash -c \
         'cd /AutowareArchitectureProposal \
